@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Update Log | V-LLATS</title>
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+
+            font-family:'Poppins', sans-serif;
+
+            background:#eef2ff;
+
+            min-height:100vh;
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            padding:40px;
+        }
+
+        .update-container{
+
+            width:100%;
+
+            max-width:720px;
+
+            background:#ffffff;
+
+            padding:55px;
+
+            border-radius:28px;
+
+            box-shadow:
+                0 10px 35px rgba(15,23,42,0.08),
+                0 4px 12px rgba(15,23,42,0.04);
+        }
+
+        .logo{
+
+            text-align:center;
+
+            font-size:58px;
+
+            font-weight:700;
+
+            color:#2563eb;
+
+            margin-bottom:8px;
+
+            letter-spacing:1px;
+        }
+
+        .subtitle{
+
+            text-align:center;
+
+            font-size:18px;
+
+            color:#6b7280;
+
+            margin-bottom:40px;
+
+            font-weight:500;
+        }
+
+        h2{
+
+            text-align:center;
+
+            font-size:42px;
+
+            font-weight:700;
+
+            color:#111827;
+
+            margin-bottom:40px;
+        }
+
+        .form-grid{
+
+            display:grid;
+
+            grid-template-columns:1fr 1fr;
+
+            gap:24px;
+            
+            align-items:end;
+        }
+
+        .form-group input{
+
+            height:58px;
+        }
+
+        .full-width{
+            grid-column:span 2;
+        }
+
+        .form-group{
+            display:flex;
+            flex-direction:column;
+        }
+
+        label{
+
+            margin-bottom:10px;
+
+            font-size:15px;
+
+            font-weight:600;
+
+            color:#1f2937;
+        }
+
+        select,
+        input{
+
+            width:100%;
+
+            padding:16px 18px;
+
+            border:1.5px solid #d1d5db;
+
+            border-radius:14px;
+
+            font-size:16px;
+
+            font-family:'Poppins', sans-serif;
+
+            background:#f9fafb;
+
+            color:#111827;
+
+            transition:0.25s ease;
+        }
+
+        select:focus,
+        input:focus{
+
+            outline:none;
+
+            border-color:#2563eb;
+
+            background:white;
+
+            box-shadow:0 0 0 4px rgba(37,99,235,0.12);
+        }
+
+        .save-btn{
+
+            width:100%;
+
+            margin-top:35px;
+
+            padding:18px;
+
+            border:none;
+
+            border-radius:16px;
+
+            background:linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color:white;
+
+            font-size:18px;
+
+            font-weight:600;
+
+            font-family:'Poppins', sans-serif;
+
+            cursor:pointer;
+
+            transition:0.25s ease;
+        }
+
+        .save-btn:hover{
+
+            transform:translateY(-2px);
+
+            box-shadow:0 12px 24px rgba(37,99,235,0.25);
+        }
+
+        @media(max-width:768px){
+
+            body{
+                padding:20px;
+            }
+
+            .update-container{
+
+                padding:35px 25px;
+
+                border-radius:22px;
+            }
+
+            .logo{
+
+                font-size:44px;
+            }
+
+            h2{
+
+                font-size:32px;
+
+                margin-bottom:30px;
+            }
+
+            .form-grid{
+
+                grid-template-columns:1fr;
+            }
+
+            .full-width{
+                grid-column:span 1;
+            }
+
+            select,
+            input{
+
+                padding:15px;
+            }
+
+            .save-btn{
+
+                padding:16px;
+
+                font-size:17px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="update-container">
+
+    <div class="logo">
+        V-LLATS
+    </div>
+
+    <div class="subtitle">
+        Update and manage your laboratory session details.
+    </div>
+
+    <h2>Update Log</h2>
+
+    <form method="POST">
+
+        <div class="form-grid">
+
+            <div class="form-group full-width">
+
+                <label>Instructor</label>
+
+                <select name="instructor"
+                        required>
+
+                    <option value="Mr. Kurt Cydrick Atienza"
+                        {% if log.instructor == 'Mr. Kurt Cydrick Atienza' %}selected{% endif %}>
+
+                        Mr. Kurt Cydrick Atienza
+
+                    </option>
+
+                    <option value="Mr. Teofilo Luistro"
+                        {% if log.instructor == 'Mr. Teofilo Luistro' %}selected{% endif %}>
+
+                        Mr. Teofilo Luistro
+
+                    </option>
+
+                    <option value="Mr. Christian Brian Mercado"
+                        {% if log.instructor == 'Mr. Christian Brian Mercado' %}selected{% endif %}>
+
+                        Mr. Christian Brian Mercado
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group full-width">
+
+                <label>Laboratory</label>
+
+                <select name="laboratory"
+                        required>
+
+                    <option value="Laboratory 1"
+                        {% if log.laboratory == 'Laboratory 1' %}selected{% endif %}>
+
+                        Laboratory 1
+
+                    </option>
+
+                    <option value="Laboratory 2"
+                        {% if log.laboratory == 'Laboratory 2' %}selected{% endif %}>
+
+                        Laboratory 2
+
+                    </option>
+
+                    <option value="Laboratory 3"
+                        {% if log.laboratory == 'Laboratory 3' %}selected{% endif %}>
+
+                        Laboratory 3
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Starting Time</label>
+
+		<input type="time"
+                       name="start_time"
+                       value="{{ log.start_time }}"
+                       required>
+
+            </div>
+
+            <div class="form-group">
+
+                <input type="time"
+                       name="end_time"
+                       value="{{ log.end_time }}"
+                       required>
+            </div>
+
+        </div>
+
+        <button type="submit"
+                class="save-btn">
+
+            Save Changes
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

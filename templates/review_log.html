@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>V-LLATS | Review Submitted Log</title>
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+
+            font-family:'Poppins', sans-serif;
+
+            background:#eef3fb;
+
+            min-height:100vh;
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            padding:40px 20px;
+        }
+
+        .container{
+
+            width:100%;
+
+            max-width:760px;
+
+            background:white;
+
+            border-radius:28px;
+
+            padding:50px;
+
+            box-shadow:
+                0 20px 60px rgba(37,99,235,0.12),
+                0 10px 25px rgba(0,0,0,0.05);
+
+            position:relative;
+
+            overflow:hidden;
+        }
+
+        .container::before{
+
+            content:"";
+
+            position:absolute;
+
+            top:-120px;
+
+            right:-120px;
+
+            width:250px;
+
+            height:250px;
+
+            background:rgba(37,99,235,0.06);
+
+            border-radius:50%;
+        }
+
+        .content{
+
+            position:relative;
+
+            z-index:2;
+        }
+
+        .logo{
+
+            text-align:center;
+
+            font-size:52px;
+
+            font-weight:800;
+
+            color:#2563eb;
+
+            letter-spacing:1px;
+
+            margin-bottom:8px;
+        }
+
+        .subtitle{
+
+            text-align:center;
+
+            color:#6b7280;
+
+            font-size:16px;
+
+            font-weight:500;
+
+            margin-bottom:35px;
+        }
+
+        h2{
+
+            text-align:center;
+
+            font-size:38px;
+
+            font-weight:700;
+
+            color:#111827;
+
+            margin-bottom:35px;
+        }
+
+        .info-grid{
+
+            display:grid;
+
+            grid-template-columns:1fr 1fr;
+
+            gap:18px;
+        }
+
+        .info-card{
+
+            background:#f8fbff;
+
+            border:1px solid #dbe7ff;
+
+            border-radius:16px;
+
+            padding:18px;
+        }
+
+        .label{
+
+            display:block;
+
+            font-size:14px;
+
+            font-weight:600;
+
+            color:#6b7280;
+
+            margin-bottom:8px;
+        }
+
+        .value{
+
+            font-size:18px;
+
+            font-weight:600;
+
+            color:#111827;
+        }
+
+        .button-group{
+
+            margin-top:35px;
+
+            display:flex;
+
+            flex-direction:column;
+
+            gap:16px;
+        }
+
+        .btn{
+
+            width:100%;
+
+            padding:18px;
+
+            border:none;
+
+            border-radius:16px;
+
+            text-decoration:none;
+
+            text-align:center;
+
+            color:white;
+
+            font-size:17px;
+
+            font-weight:700;
+
+            font-family:'Poppins', sans-serif;
+
+            cursor:pointer;
+
+            transition:0.25s ease;
+        }
+
+        .btn:hover{
+
+            transform:translateY(-2px);
+        }
+
+        .update{
+
+            background:linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            box-shadow:0 10px 25px rgba(37,99,235,0.25);
+        }
+
+        .delete{
+
+            background:linear-gradient(
+                135deg,
+                #ef4444,
+                #dc2626
+            );
+
+            box-shadow:0 10px 25px rgba(239,68,68,0.20);
+        }
+
+        .done{
+
+            background:linear-gradient(
+                135deg,
+                #22c55e,
+                #16a34a
+            );
+
+            box-shadow:0 10px 25px rgba(34,197,94,0.20);
+        }
+
+        .toast-message{
+
+            position:fixed;
+
+            bottom:30px;
+
+            left:50%;
+
+            transform:translateX(-50%);
+
+            background:#16a34a;
+
+            color:white;
+
+            padding:16px 28px;
+
+            border-radius:14px;
+
+            font-size:15px;
+
+            font-weight:600;
+
+            box-shadow:0 10px 25px rgba(0,0,0,0.12);
+
+            animation:fadeOut 3s forwards;
+
+            z-index:3000;
+        }
+
+        @keyframes fadeOut{
+
+            0%{
+                opacity:1;
+            }
+
+            80%{
+                opacity:1;
+            }
+
+            100%{
+                opacity:0;
+                visibility:hidden;
+            }
+        }
+
+        /* MODAL */
+
+        .modal{
+
+            display:none;
+
+            position:fixed;
+
+            inset:0;
+
+            background:rgba(0,0,0,0.45);
+
+            z-index:5000;
+        }
+
+        .modal-content{
+
+            width:90%;
+
+            max-width:420px;
+
+            background:white;
+
+            border-radius:24px;
+
+            padding:35px;
+
+            position:absolute;
+
+            top:50%;
+
+            left:50%;
+
+            transform:translate(-50%, -50%);
+
+            text-align:center;
+
+            box-shadow:0 25px 60px rgba(0,0,0,0.20);
+        }
+
+        .modal-content h3{
+
+            font-size:30px;
+
+            color:#111827;
+
+            margin-bottom:12px;
+        }
+
+        .modal-content p{
+
+            font-size:16px;
+
+            color:#6b7280;
+
+            line-height:1.6;
+
+            margin-bottom:28px;
+        }
+
+        .modal-buttons{
+
+            display:flex;
+
+            gap:15px;
+        }
+
+        .yes-btn,
+        .no-btn{
+
+            flex:1;
+
+            padding:14px;
+
+            border:none;
+
+            border-radius:12px;
+
+            text-decoration:none;
+
+            color:white;
+
+            font-size:15px;
+
+            font-weight:600;
+
+            cursor:pointer;
+
+            font-family:'Poppins', sans-serif;
+        }
+
+        .yes-btn{
+
+            background:#dc2626;
+        }
+
+        .no-btn{
+
+            background:#6b7280;
+        }
+
+        @media(max-width:768px){
+
+            .container{
+
+                padding:35px 25px;
+            }
+
+            .logo{
+
+                font-size:42px;
+            }
+
+            h2{
+
+                font-size:30px;
+            }
+
+            .info-grid{
+
+                grid-template-columns:1fr;
+            }
+
+            .modal-buttons{
+
+                flex-direction:column;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="content">
+
+        <div class="logo">
+            V-LLATS
+        </div>
+
+        <div class="subtitle">
+            Laboratory Log Review
+        </div>
+
+        <h2>
+            Review Submitted Log
+        </h2>
+
+        <div class="info-grid">
+
+            <div class="info-card">
+                <span class="label">SR-Code</span>
+                <div class="value">
+                    {{ student.sr_code }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <span class="label">Full Name</span>
+                <div class="value">
+                    {{ student.full_name }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <span class="label">Program</span>
+                <div class="value">
+                    {{ student.program }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <span class="label">Section</span>
+                <div class="value">
+                    {{ student.section_name }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <span class="label">Instructor</span>
+                <div class="value">
+                    {{ log.instructor }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <span class="label">Laboratory</span>
+                <div class="value">
+                    {{ log.laboratory }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <span class="label">
+                    Starting Time
+                </span>
+
+                <div class="value">
+                    {{ formatted_start }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <span class="label">
+                    Ending Time
+                </span>
+
+                <div class="value">
+                    {{ formatted_end }}
+               </div>
+           </div>
+
+        </div>
+
+        <div class="button-group">
+
+            <a href="/update_log/{{ log.id }}"
+               class="btn update">
+
+                Update Log
+
+            </a>
+
+            <button type="button"
+                    class="btn delete"
+                    onclick="openDeleteModal()">
+
+                Delete Log
+
+            </button>
+
+            <button type="button"
+                    class="btn done"
+                    onclick="openFinalizeModal()">
+
+                Finalize / Done
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% if message %}
+<div class="toast-message">
+
+    {{ message }}
+
+</div>
+{% endif %}
+
+<!-- DELETE MODAL -->
+
+<div id="deleteModal"
+     class="modal">
+
+    <div class="modal-content">
+
+        <h3>
+            Confirm Delete
+        </h3>
+
+        <p>
+            Are you sure you want to permanently
+            delete this laboratory log?
+        </p>
+
+        <div class="modal-buttons">
+
+            <a href="/delete_log/{{ log.id }}"
+               class="yes-btn">
+
+                Yes
+
+            </a>
+
+            <button type="button"
+                    class="no-btn"
+                    onclick="closeDeleteModal()">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FINALIZE MODAL -->
+
+<div id="finalizeModal"
+     class="modal">
+
+    <div class="modal-content">
+
+        <h3>
+            Finalize Log
+        </h3>
+
+        <p>
+            Are you sure you want to finalize
+            this log and proceed to the next student?
+        </p>
+
+        <div class="modal-buttons">
+
+            <a href="/logout"
+               class="yes-btn">
+
+                Yes
+
+            </a>
+
+            <button type="button"
+                    class="no-btn"
+                    onclick="closeFinalizeModal()">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    function openDeleteModal(){
+
+        document.getElementById(
+            "deleteModal"
+        ).style.display = "block";
+    }
+
+    function closeDeleteModal(){
+
+        document.getElementById(
+            "deleteModal"
+        ).style.display = "none";
+    }
+
+    function openFinalizeModal(){
+
+        document.getElementById(
+            "finalizeModal"
+        ).style.display = "block";
+    }
+
+    function closeFinalizeModal(){
+
+        document.getElementById(
+            "finalizeModal"
+        ).style.display = "none";
+    }
+
+</script>
+
+</body>
+</html>

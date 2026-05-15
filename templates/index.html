@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>V-LLATS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            overflow:hidden;
+            background:
+                linear-gradient(
+                    135deg,
+                    #dfe9ff,
+                    #edf3ff,
+                    #f4f7ff
+                );
+            position:relative;
+        }
+
+        /* BACKGROUND DESIGN */
+
+        .circle1,
+        .circle2,
+        .circle3,
+        .circle4{
+            position:absolute;
+            border-radius:50%;
+            background:rgba(0,123,255,0.08);
+            z-index:0;
+        }
+
+        .circle1{
+            width:320px;
+            height:320px;
+            top:-100px;
+            left:-100px;
+        }
+
+        .circle2{
+            width:250px;
+            height:250px;
+            bottom:-80px;
+            right:-60px;
+        }
+
+        .circle3{
+            width:120px;
+            height:120px;
+            top:140px;
+            right:160px;
+            background:rgba(0,123,255,0.05);
+        }
+
+        .circle4{
+            width:180px;
+            height:180px;
+            bottom:100px;
+            left:120px;
+            background:rgba(0,123,255,0.05);
+        }
+
+        /* MAIN CONTAINER */
+
+        .main-container{
+            width:90%;
+            max-width:1450px;
+            min-height:760px;
+            background:white;
+            border-radius:35px;
+            overflow:hidden;
+            box-shadow:0 20px 60px rgba(0,0,0,0.12);
+            display:flex;
+            position:relative;
+            z-index:1;
+        }
+
+        /* LEFT PANEL */
+
+        .left-panel{
+            width:55%;
+            background:
+                linear-gradient(
+                    160deg,
+                    #0066ff,
+                    #0052cc,
+                    #003d99
+                );
+            color:white;
+            padding:80px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            position:relative;
+            overflow:hidden;
+        }
+
+        .left-panel::before{
+            content:"";
+            position:absolute;
+            width:500px;
+            height:500px;
+            border-radius:50%;
+            background:rgba(255,255,255,0.08);
+            top:-200px;
+            right:-150px;
+        }
+
+        .left-panel::after{
+            content:"";
+            position:absolute;
+            width:300px;
+            height:300px;
+            border-radius:50%;
+            background:rgba(255,255,255,0.05);
+            bottom:-100px;
+            left:-80px;
+        }
+
+        .logo-icon{
+            font-size:70px;
+            margin-bottom:25px;
+            z-index:1;
+        }
+
+        .system-title{
+            font-size:70px;
+            font-weight:800;
+            line-height:1.1;
+            margin-bottom:25px;
+            z-index:1;
+        }
+
+        .system-subtitle{
+            font-size:24px;
+            line-height:1.8;
+            font-weight:300;
+            color:rgba(255,255,255,0.9);
+            margin-bottom:35px;
+            z-index:1;
+        }
+
+        .highlight{
+            color:#ffd54f;
+            font-weight:700;
+        }
+
+        .features{
+            margin-top:10px;
+            z-index:1;
+        }
+
+        .feature-item{
+            display:flex;
+            align-items:center;
+            gap:15px;
+            margin-bottom:18px;
+            font-size:18px;
+            color:rgba(255,255,255,0.92);
+        }
+
+        .feature-icon{
+            width:42px;
+            height:42px;
+            background:rgba(255,255,255,0.15);
+            border-radius:12px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:20px;
+        }
+
+        /* RIGHT PANEL */
+
+        .right-panel{
+            width:45%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:70px;
+            background:#f9fbff;
+        }
+
+        .login-card{
+            width:100%;
+            max-width:500px;
+            background:white;
+            border-radius:30px;
+            padding:60px 50px;
+            text-align:center;
+            box-shadow:0 12px 40px rgba(0,0,0,0.08);
+        }
+
+        .welcome-text{
+            font-size:20px;
+            color:#666;
+            margin-bottom:12px;
+        }
+
+        .login-title{
+            font-size:42px;
+            font-weight:700;
+            color:#222;
+            margin-bottom:18px;
+        }
+
+        .login-description{
+            font-size:17px;
+            color:#777;
+            line-height:1.8;
+            margin-bottom:45px;
+        }
+
+        .button-group{
+            display:flex;
+            flex-direction:column;
+            gap:22px;
+        }
+
+        .login-btn{
+            text-decoration:none;
+            padding:20px;
+            border-radius:18px;
+            font-size:18px;
+            font-weight:600;
+            transition:0.3s ease;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            gap:12px;
+        }
+
+        .student-btn{
+            background:linear-gradient(
+                135deg,
+                #007bff,
+                #005ce6
+            );
+            color:white;
+            box-shadow:0 10px 25px rgba(0,123,255,0.25);
+        }
+
+        .student-btn:hover{
+            transform:translateY(-5px);
+            box-shadow:0 18px 35px rgba(0,123,255,0.35);
+        }
+
+        .admin-btn{
+            background:#111;
+            color:white;
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .admin-btn:hover{
+            transform:translateY(-5px);
+            background:#222;
+            box-shadow:0 18px 35px rgba(0,0,0,0.28);
+        }
+
+        .footer-text{
+            margin-top:45px;
+            color:#888;
+            font-size:15px;
+            line-height:1.7;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:1200px){
+
+            .main-container{
+                flex-direction:column;
+                min-height:auto;
+            }
+
+            .left-panel,
+            .right-panel{
+                width:100%;
+            }
+
+            .left-panel{
+                padding:60px;
+            }
+
+            .system-title{
+                font-size:50px;
+            }
+        }
+
+        @media(max-width:768px){
+
+            body{
+                padding:20px;
+            }
+
+            .main-container{
+                width:100%;
+                border-radius:25px;
+            }
+
+            .left-panel,
+            .right-panel{
+                padding:40px 30px;
+            }
+
+            .system-title{
+                font-size:40px;
+            }
+
+            .system-subtitle{
+                font-size:18px;
+            }
+
+            .login-card{
+                padding:40px 30px;
+            }
+
+            .login-title{
+                font-size:32px;
+            }
+
+            .login-btn{
+                font-size:16px;
+                padding:18px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- BACKGROUND CIRCLES -->
+
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+
+    
+
+    <div class="main-container">
+
+        
+
+        <div class="left-panel">
+
+            <div class="logo-icon">
+                🧪
+            </div>
+
+            <h1 class="system-title">
+                V-LLATS
+            </h1>
+
+            <p class="system-subtitle">
+                Virtual Laboratory Logbook and Tracking System designed for
+                <span class="highlight">
+                    smarter laboratory monitoring,
+                </span>
+                faster student transactions, and efficient educational management.
+            </p>
+
+            <div class="features">
+
+                <div class="feature-item">
+                    <div class="feature-icon">📘</div>
+                    Digital laboratory logbook recording
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    Real-time analytics and laboratory tracking
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    Faster student and admin workflow management
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    Secure and organized laboratory monitoring
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT PANEL -->
+
+        <div class="right-panel">
+
+            <div class="login-card">
+
+                <p class="welcome-text">
+                    Welcome to
+                </p>
+
+                <h2 class="login-title">
+                    V-LLATS Portal
+                </h2>
+
+                <p class="login-description">
+                    Where every laboratory session is
+                    <strong style="color:#007bff;">
+                        logged,
+                    </strong>
+                    <strong style="color:#007bff;">
+                        tracked,
+                    </strong>
+                    and
+                    <strong style="color:#007bff;">
+                        managed seamlessly.
+                    </strong>
+                    
+                </p>
+
+                <div class="button-group">
+
+                    <a href="/login" class="login-btn student-btn">
+                        🎓 Student Login
+                    </a>
+
+                    <a href="/admin_login" class="login-btn admin-btn">
+                        🛠️ Admin Login
+                    </a>
+
+                </div>
+
+                <div class="footer-text">
+                    Efficient Laboratory Monitoring for Modern Education<br>
+                    Built for accuracy, organization, and tracking.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

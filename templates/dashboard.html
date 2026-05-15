@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>V-LLATS | Laboratory Logging Form</title>
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Poppins', sans-serif;
+
+            background:#eef3fb;
+
+            min-height:100vh;
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            padding:40px 20px;
+
+            overflow-x:hidden;
+        }
+
+        .container{
+
+            width:100%;
+
+            max-width:760px;
+
+            background:white;
+
+            border-radius:28px;
+
+            padding:55px;
+
+            box-shadow:
+                0 20px 60px rgba(37,99,235,0.12),
+                0 8px 20px rgba(0,0,0,0.05);
+
+            position:relative;
+
+            overflow:hidden;
+        }
+
+        .container::before{
+
+            content:"";
+
+            position:absolute;
+
+            top:-120px;
+
+            right:-120px;
+
+            width:260px;
+
+            height:260px;
+
+            background:rgba(37,99,235,0.08);
+
+            border-radius:50%;
+        }
+
+        .container::after{
+
+            content:"";
+
+            position:absolute;
+
+            bottom:-140px;
+
+            left:-140px;
+
+            width:300px;
+
+            height:300px;
+
+            background:rgba(37,99,235,0.05);
+
+            border-radius:50%;
+        }
+
+        .content{
+
+            position:relative;
+
+            z-index:2;
+        }
+
+        .logo{
+
+            text-align:center;
+
+            font-size:64px;
+
+            font-weight:800;
+
+            color:#2563eb;
+
+            letter-spacing:2px;
+
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+
+            text-align:center;
+
+            font-size:18px;
+
+            font-weight:500;
+
+            color:#6b7280;
+
+            margin-bottom:15px;
+        }
+
+        .tagline{
+
+            text-align:center;
+
+            font-size:24px;
+
+            line-height:1.5;
+
+            font-weight:700;
+
+            color:#111827;
+
+            max-width:600px;
+
+            margin:0 auto 45px auto;
+        }
+
+        .tagline span{
+
+            color:#2563eb;
+        }
+
+        .form-grid{
+
+            display:grid;
+
+            grid-template-columns:1fr 1fr;
+
+            gap:22px;
+        }
+
+        .form-group{
+
+            display:flex;
+
+            flex-direction:column;
+        }
+
+        .full-width{
+
+            grid-column:1 / -1;
+        }
+
+        label{
+
+            margin-bottom:10px;
+
+            font-size:15px;
+
+            font-weight:600;
+
+            color:#111827;
+        }
+
+        input,
+        select{
+
+            width:100%;
+
+            padding:16px 18px;
+
+            border:1.5px solid #dbe3f0;
+
+            border-radius:14px;
+
+            font-size:16px;
+
+            font-family:'Poppins', sans-serif;
+
+            background:#f9fbff;
+
+            color:#111827;
+
+            transition:0.25s ease;
+        }
+
+        input:focus,
+        select:focus{
+
+            outline:none;
+
+            border-color:#2563eb;
+
+            background:white;
+
+            box-shadow:0 0 0 5px rgba(37,99,235,0.12);
+        }
+
+        input[readonly]{
+
+            background:#f3f6fb;
+
+            color:#374151;
+
+            font-weight:500;
+        }
+
+        .submit-btn{
+
+            width:100%;
+
+            margin-top:15px;
+
+            padding:18px;
+
+            border:none;
+
+            border-radius:16px;
+
+            background:linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color:white;
+
+            font-size:18px;
+
+            font-weight:700;
+
+            font-family:'Poppins', sans-serif;
+
+            cursor:pointer;
+
+            transition:0.25s ease;
+
+            box-shadow:0 10px 25px rgba(37,99,235,0.25);
+        }
+
+        .submit-btn:hover{
+
+            transform:translateY(-2px);
+
+            box-shadow:0 16px 30px rgba(37,99,235,0.30);
+        }
+
+        .footer-text{
+
+            text-align:center;
+
+            margin-top:22px;
+
+            color:#6b7280;
+
+            font-size:14px;
+
+            font-weight:500;
+        }
+
+        @media(max-width:768px){
+
+            .container{
+
+                padding:35px 25px;
+            }
+
+            .logo{
+
+                font-size:48px;
+            }
+
+            .tagline{
+
+                font-size:20px;
+            }
+
+            .form-grid{
+
+                grid-template-columns:1fr;
+            }
+
+            .full-width{
+
+                grid-column:auto;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="content">
+
+        <div class="logo">
+            V-LLATS
+        </div>
+
+        <div class="subtitle">
+            Virtual Laboratory Logbook and Tracking System
+        </div>
+
+        <div class="tagline">
+            Smarter laboratory monitoring with
+            <span>faster, seamless, and organized</span>
+            session logging.
+        </div>
+
+        <form method="POST"
+              action="/submit_log">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>SR-Code</label>
+
+                    <input type="text"
+                           value="{{ student.sr_code }}"
+                           readonly>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Full Name</label>
+
+                    <input type="text"
+                           value="{{ student.full_name }}"
+                           readonly>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Program</label>
+
+                    <input type="text"
+                           value="{{ student.program }}"
+                           readonly>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Section</label>
+
+                    <input type="text"
+                           value="{{ student.section_name }}"
+                           readonly>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Instructor</label>
+
+                    <select name="instructor"
+                            required>
+
+                        <option value="">
+                            Select Instructor
+                        </option>
+
+                        <option>
+                            Mr. Kurt Cydrick Atienza
+                        </option>
+
+                        <option>
+                            Mr. Teofilo Luistro
+                        </option>
+
+                        <option>
+                            Mr. Christian Brian Mercado
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Laboratory</label>
+
+                    <select name="laboratory"
+                            required>
+
+                        <option value="">
+                            Select Laboratory
+                        </option>
+
+                        <option>
+                            Laboratory 1
+                        </option>
+
+                        <option>
+                            Laboratory 2
+                        </option>
+
+                        <option>
+                            Laboratory 3
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Starting Time</label>
+
+                    <input type="time"
+                           name="start_time"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Ending Time</label>
+
+                    <input type="time"
+                           name="end_time"
+                           required>
+
+                </div>
+
+                <div class="form-group full-width">
+
+                    <button type="submit"
+                            class="submit-btn">
+
+                        Submit Laboratory Log
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <div class="footer-text">
+            Digital laboratory logging built for modern education.
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>V-LLATS | Admin Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+
+            background:#eef3ff;
+
+            min-height:100vh;
+
+            padding:40px 20px;
+
+            color:#111827;
+        }
+
+        .container{
+
+            width:100%;
+
+            max-width:1500px;
+
+            margin:auto;
+        }
+
+        /* HEADER */
+
+        .dashboard-header{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            margin-bottom:35px;
+
+            flex-wrap:wrap;
+
+            gap:20px;
+        }
+
+        .dashboard-title h1{
+
+            font-size:42px;
+
+            font-weight:700;
+
+            color:#2563eb;
+
+            margin-bottom:8px;
+        }
+
+        .dashboard-title p{
+
+            color:#6b7280;
+
+            font-size:16px;
+        }
+
+        .logout-btn{
+
+            border:none;
+
+            padding:15px 26px;
+
+            border-radius:14px;
+
+            background:linear-gradient(
+                135deg,
+                #ef4444,
+                #dc2626
+            );
+
+            color:white;
+
+            font-size:15px;
+
+            font-weight:600;
+
+            cursor:pointer;
+
+            transition:0.3s ease;
+        }
+
+        .logout-btn:hover{
+
+            transform:translateY(-2px);
+
+            box-shadow:0 12px 25px rgba(239,68,68,0.25);
+        }
+
+        /* FILTER SECTION */
+
+        .filter-form{
+
+            background:white;
+
+            border-radius:24px;
+
+            padding:25px;
+
+            box-shadow:
+                0 10px 35px rgba(0,0,0,0.06);
+
+            display:flex;
+
+            align-items:flex-end;
+
+            gap:18px;
+
+            flex-wrap:wrap;
+
+            margin-bottom:35px;
+        }
+
+        .search-group{
+
+            flex:1;
+
+            min-width:300px;
+        }
+
+        .search-group label,
+        .date-group label{
+
+            display:block;
+
+            margin-bottom:10px;
+
+            font-size:14px;
+
+            font-weight:600;
+
+            color:#374151;
+        }
+
+        .filter-form input{
+
+            width:100%;
+
+            height:55px;
+
+            padding:16px 18px;
+
+            border:1px solid #dbe2f0;
+
+            border-radius:16px;
+
+            outline:none;
+
+            font-size:15px;
+
+            transition:0.3s;
+        }
+
+        .filter-form input:focus{
+
+            border-color:#2563eb;
+
+            box-shadow:0 0 0 4px rgba(37,99,235,0.08);
+        }
+
+        .date-group{
+
+            width:220px;
+        }
+
+        .filter-btn{
+
+            height:55px;
+
+            padding:0 28px;
+
+            border:none;
+
+            border-radius:16px;
+
+            background:linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color:white;
+
+            font-size:15px;
+
+            font-weight:600;
+
+            cursor:pointer;
+
+            transition:0.3s ease;
+        }
+
+        .filter-btn:hover{
+
+            transform:translateY(-2px);
+
+            box-shadow:0 12px 25px rgba(37,99,235,0.25);
+        }
+
+        /* ANALYTICS */
+
+        .analytics-container{
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+
+            gap:22px;
+
+            margin-bottom:35px;
+        }
+
+        .analytics-box{
+
+            background:white;
+
+            border-radius:24px;
+
+            padding:28px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.06);
+
+            transition:0.3s ease;
+        }
+
+        .analytics-box:hover{
+
+            transform:translateY(-4px);
+        }
+
+        .analytics-box h3{
+
+            color:#2563eb;
+
+            font-size:17px;
+
+            margin-bottom:18px;
+
+            font-weight:600;
+        }
+
+        .analytics-box p{
+
+            font-size:30px;
+
+            font-weight:700;
+
+            color:#111827;
+
+            margin-bottom:12px;
+        }
+
+        .analytics-box small{
+
+            color:#6b7280;
+
+            font-size:13px;
+
+            line-height:1.6;
+        }
+
+        /* TABLE SECTION */
+
+        .table-wrapper{
+
+            background:white;
+
+            border-radius:24px;
+
+            padding:25px;
+
+            box-shadow:
+                0 10px 35px rgba(0,0,0,0.06);
+
+            overflow-x:auto;
+        }
+
+        .table-header{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            margin-bottom:22px;
+
+            flex-wrap:wrap;
+
+            gap:10px;
+        }
+
+        .table-header h2{
+
+            font-size:28px;
+
+            color:#111827;
+        }
+
+        .table-header span{
+
+            color:#6b7280;
+
+            font-size:14px;
+        }
+
+        table{
+
+            width:100%;
+
+            border-collapse:collapse;
+
+            min-width:1200px;
+        }
+
+        table th{
+
+            background:#2563eb;
+
+            color:white;
+
+            padding:18px 14px;
+
+            font-size:14px;
+
+            font-weight:600;
+
+            border:none;
+        }
+
+        table th:first-child{
+
+            border-top-left-radius:14px;
+        }
+
+        table th:last-child{
+
+            border-top-right-radius:14px;
+        }
+
+        table td{
+
+            padding:18px 14px;
+
+            text-align:center;
+
+            font-size:14px;
+
+            border-bottom:1px solid #edf1f7;
+        }
+
+        table tr{
+
+            transition:0.3s ease;
+        }
+
+        table tr:hover{
+
+            background:#f5f9ff;
+        }
+
+        table tr:nth-child(even){
+
+            background:#fafcff;
+        }
+
+        .no-data{
+
+            padding:30px;
+
+            color:#6b7280;
+
+            font-size:15px;
+        }
+
+        /* MODAL */
+
+        .modal{
+
+            display:none;
+
+            position:fixed;
+
+            z-index:1000;
+
+            left:0;
+
+            top:0;
+
+            width:100%;
+
+            height:100%;
+
+            background:rgba(0,0,0,0.45);
+
+            backdrop-filter:blur(3px);
+        }
+
+        .modal-content{
+
+            width:420px;
+
+            background:white;
+
+            border-radius:28px;
+
+            padding:40px 35px;
+
+            text-align:center;
+
+            position:absolute;
+
+            top:50%;
+
+            left:50%;
+
+            transform:translate(-50%, -50%);
+
+            animation:popup 0.3s ease;
+        }
+
+        @keyframes popup{
+
+            from{
+                opacity:0;
+                transform:translate(-50%, -45%);
+            }
+
+            to{
+                opacity:1;
+                transform:translate(-50%, -50%);
+            }
+        }
+
+        .modal-content h2{
+
+            font-size:34px;
+
+            margin-bottom:15px;
+
+            color:#111827;
+        }
+
+        .modal-content p{
+
+            color:#6b7280;
+
+            line-height:1.7;
+
+            margin-bottom:28px;
+        }
+
+        .modal-buttons{
+
+            display:flex;
+
+            justify-content:center;
+
+            gap:15px;
+        }
+
+        .yes-btn,
+        .no-btn{
+
+            flex:1;
+
+            padding:15px;
+
+            border:none;
+
+            border-radius:14px;
+
+            color:white;
+
+            font-size:15px;
+
+            font-weight:600;
+
+            cursor:pointer;
+
+            text-decoration:none;
+
+            transition:0.3s ease;
+        }
+
+        .yes-btn{
+
+            background:#22c55e;
+        }
+
+        .yes-btn:hover{
+
+            background:#16a34a;
+        }
+
+        .no-btn{
+
+            background:#6b7280;
+        }
+
+        .no-btn:hover{
+
+            background:#4b5563;
+        }
+
+        @media(max-width:768px){
+
+            .dashboard-header{
+
+                flex-direction:column;
+
+                align-items:flex-start;
+            }
+
+            .dashboard-title h1{
+
+                font-size:34px;
+            }
+
+            .table-header{
+
+                flex-direction:column;
+
+                align-items:flex-start;
+            }
+
+            .modal-content{
+
+                width:90%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <div class="dashboard-title">
+
+            <h1>V-LLATS Admin Dashboard</h1>
+
+            <p>
+                Monitor laboratory activity, student logs,
+                and laboratory analytics in real time.
+            </p>
+
+        </div>
+
+        <button class="logout-btn"
+                onclick="openLogoutModal()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+    <!-- FILTER FORM -->
+
+    <form method="GET"
+          class="filter-form">
+
+        <div class="search-group">
+
+            <label>Search Logs</label>
+
+            <input
+                type="text"
+                name="search"
+                value="{{ request.args.get('search', '') }}"
+                placeholder="Search SR-Code, Name, Instructor, Laboratory"
+            >
+
+        </div>
+
+        <div class="date-group">
+
+            <label>Filter By Date</label>
+
+            <input
+                type="date"
+                name="filter_date"
+                value="{{ request.args.get('filter_date', '') }}"
+            >
+
+        </div>
+
+        <button type="submit"
+                class="filter-btn">
+
+            Filter Search
+
+        </button>
+
+    </form>
+
+    <!-- ANALYTICS -->
+
+    <div class="analytics-container">
+
+        <div class="analytics-box">
+
+            <h3>Total Logs Today</h3>
+
+            <p>{{ total_logs }}</p>
+
+            <small>
+                {{ current_datetime }}
+            </small>
+
+        </div>
+
+        <div class="analytics-box">
+
+            <h3>Most Used Laboratory</h3>
+
+            <p>
+                {{ most_used_lab[0] if most_used_lab else 'N/A' }}
+            </p>
+
+            <small>
+                {{ most_used_lab[1] if most_used_lab else 0 }}
+                log(s) within the last 30 days
+            </small>
+
+        </div>
+
+        <div class="analytics-box">
+
+            <h3>Most Active Student</h3>
+
+            <p>
+                {{ most_active_student[0] if most_active_student else 'N/A' }}
+            </p>
+
+            <small>
+                {{ most_active_student[1] if most_active_student else 0 }}
+                log(s) within the last 30 days
+            </small>
+
+        </div>
+
+        <div class="analytics-box">
+
+            <h3>Most Selected Instructor</h3>
+
+            <p>
+                {{ most_selected_instructor[0] if most_selected_instructor else 'N/A' }}
+            </p>
+
+            <small>
+                {{ most_selected_instructor[1] if most_selected_instructor else 0 }}
+                log(s) within the last 30 days
+            </small>
+
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="table-wrapper">
+
+        <div class="table-header">
+
+            <h2>Submitted Laboratory Logs</h2>
+
+            <span>
+                Total Results:
+                {{ logs|length }}
+            </span>
+
+        </div>
+
+        <table>
+
+            <tr>
+
+                <th>Log ID</th>
+                <th>SR-Code</th>
+                <th>Name</th>
+                <th>Program</th>
+                <th>Section</th>
+                <th>Instructor</th>
+                <th>Laboratory</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Timestamp</th>
+
+            </tr>
+
+            {% if logs|length == 0 %}
+
+            <tr>
+
+                <td colspan="10"
+                    class="no-data">
+
+                    No matching logs found.
+
+                </td>
+
+            </tr>
+
+            {% endif %}
+
+            {% for log in logs %}
+
+            <tr>
+
+                <td>{{ log.log_code }}</td>
+                <td>{{ log.student.sr_code }}</td>
+                <td>{{ log.student.full_name }}</td>
+                <td>{{ log.student.program }}</td>
+                <td>{{ log.student.section_name }}</td>
+                <td>{{ log.instructor }}</td>
+                <td>{{ log.laboratory }}</td>
+                <td>{{ log.start_time }}</td>
+                <td>{{ log.end_time }}</td>
+                <td>{{ log.timestamp }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- LOGOUT MODAL -->
+
+<div id="logoutModal"
+     class="modal">
+
+    <div class="modal-content">
+
+        <h2>Logout</h2>
+
+        <p>
+            Are you sure you want to logout
+            from the admin dashboard?
+        </p>
+
+        <div class="modal-buttons">
+
+            <a href="/admin_logout"
+               class="yes-btn">
+
+               Yes
+
+            </a>
+
+            <button class="no-btn"
+                    onclick="closeLogoutModal()">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function openLogoutModal(){
+
+    document.getElementById(
+        "logoutModal"
+    ).style.display = "block";
+}
+
+function closeLogoutModal(){
+
+    document.getElementById(
+        "logoutModal"
+    ).style.display = "none";
+}
+
+</script>
+
+</body>
+
+</html>
