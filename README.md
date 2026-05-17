@@ -1,6 +1,6 @@
 # V-LLATS Deployment Guide
 
-## Virtual Laboratory Logbook and Tracking System (V-LLATS)
+## V-LLATS: Virtual Laboratory Logbook and Tracking System 
 
 A complete step-by-step deployment and installation manual for a clean-slate Ubuntu environment.
 
@@ -8,7 +8,7 @@ A complete step-by-step deployment and installation manual for a clean-slate Ubu
 
 # 1. Project Overview
 
-The **Virtual Laboratory Logbook and Tracking System (V-LLATS)** is a web-based laboratory monitoring and tracking platform developed using Flask and MySQL. The system allows students to digitally submit laboratory logbook entries while enabling administrators to monitor, search, filter, and analyze laboratory usage in real time.
+The **V-LLATS: Virtual Laboratory Logbook and Tracking System** is a web-based laboratory monitoring and tracking platform developed using Flask and MySQL. The system allows students to digitally submit laboratory logbook entries while enabling administrators to monitor, search, filter, and analyze laboratory usage in real time.
 
 The system was designed to replace traditional handwritten laboratory logbooks with a centralized digital solution that improves efficiency, organization, accessibility, and monitoring within educational laboratory environments.
 
