@@ -80,10 +80,6 @@ The application supports two main user roles:
 - Systemd Service
 - UFW Firewall
 
-## Optional Deployment Technology
-
-- Docker Containerization (future enhancement)
-
 ---
 
 # 4. System Architecture
@@ -91,15 +87,15 @@ The application supports two main user roles:
 The system architecture follows a layered web application structure.
 
 ```text
-Client Browser
+User Layer
        ↓
-Nginx Reverse Proxy
+Client Access Layer
        ↓
-Flask Web Application
+Application Layer
        ↓
-SQLAlchemy ORM
+Database Layer
        ↓
-MySQL Database
+Infrastructure Layer
 ```
 
 ---
