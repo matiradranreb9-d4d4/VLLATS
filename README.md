@@ -1131,16 +1131,16 @@ After reboot:
 
 ---
 
-# 18. Developers
+# 18. Team
 
-## Developers
-
-- Atienza, Rhaianne Margarette C.
-- Buhay, Mark Tristan B.
-- Fermalan, Jurby Kevin C.
-- Lastimozo, Jericho C.
-- Manalo, Ma. Jane Lariz P.
-- Matira, Dranreb B.
+| Name                             | Role                                              |
+| -------------------------------- | ------------------------------------------------- |
+| ATIENZA, RHAIANNE MARGARETTE C.  | Documentation, Designer, and Presentation         |
+| BUHAY, MARK TRISTAN B.           | Documentation, Designer, and Presentation         |
+| FERMALAN, JURBY KEVIN C.         | Co-Developer                                      |
+| MANALO, MA. JANE LARIZ P.        | Documentation, Designer, and Presentation         |
+| MATIRA, DRANREB B.               | System Developer and Integrator, GITHub Manager   |
+| LASTIMOZO, JERICHO C.            | Documentation, Designer, and Presentation         |
 
 ---
 
